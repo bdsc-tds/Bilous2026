@@ -124,7 +124,7 @@ if __name__ == "__main__":
                 annot_file = (
                     args.cell_type_annotation_dir
                     / name_annot
-                    / f"{args.normalisation}/reference_based/{args.reference}/{args.method}/{args.level}/single_cell/labels.parquet"
+                    / f"{args.normalisation}/{args.annotation_mode}/{args.reference}/{args.method}/{args.level}/single_cell/labels.parquet"
                 )
                 ads[k].obs[labels_key] = pd.read_parquet(annot_file).set_index("cell_id").iloc[:, 0]
                 ads[k] = ads[k][ads[k].obs[labels_key].notna()].copy()

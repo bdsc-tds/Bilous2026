@@ -120,6 +120,7 @@ xenium_paths = {}
 xenium_annot_paths = {}
 
 for correction_method in correction_methods:
+    print(f"Processing {correction_method} for condition {condition} and panel {panel}")
     xenium_paths[correction_method] = {}
     xenium_annot_paths[correction_method] = {}
 
@@ -163,9 +164,17 @@ for correction_method in correction_methods:
                                 )
 
                             else:
-                                if correction_method == "resolvi":
+                                if correction_method in [
+                                    "resolvi",
+                                    "resolvi_panel_use_batch=True",
+                                    "resolvi_panel_use_batch=False",
+                                ]:
                                     name_corrected = f"{name}/{mixture_k=}/{num_samples=}/"
-                                elif correction_method == "resolvi_supervised":
+                                elif correction_method in [
+                                    "resolvi_supervised",
+                                    "resolvi_panel_supervised_use_batch=True",
+                                    "resolvi_panel_supervised_use_batch=False",
+                                ]:
                                     name_corrected = f"{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}"
                                 elif "ovrlpy" in correction_method:
                                     name_corrected = f"{name}"

@@ -609,6 +609,9 @@ def write_10X_h5(adata, file):
         None
     """
 
+    if isinstance(file, Path):
+        file = file.as_posix()
+
     if ".h5" not in file:
         file = f"{file}.h5"
     if Path(file).exists():
@@ -1122,10 +1125,8 @@ def _read_contamination_metrics_results_sample(
     if condition.stem == "melanoma":
         if level == "Level2.1":
             level = "Level1"
-            print("Using Level1 for melanoma\t")
         if reference == "matched_reference_combo":
             reference = "external_reference"
-            print("Using external_reference for melanoma\t")
 
     k = (segmentation.stem, condition.stem, panel.stem, donor.stem, sample.stem)
     name = "/".join(k)
@@ -1150,9 +1151,13 @@ def _read_contamination_metrics_results_sample(
     # full path prefix
     if correction_method == "raw":
         name = f"{correction_method}/{name}"
-    elif correction_method == "resolvi":
+    elif correction_method in ["resolvi", "resolvi_panel_use_batch=True", "resolvi_panel_use_batch=False"]:
         name = f"{correction_method}/{name}/{mixture_k=}/{num_samples=}/"
-    elif correction_method == "resolvi_supervised":
+    elif correction_method in [
+        "resolvi_supervised",
+        "resolvi_panel_supervised_use_batch=True",
+        "resolvi_panel_supervised_use_batch=False",
+    ]:
         name = f"{correction_method}/{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}"
     elif "ovrlpy" in correction_method:
         name = f"{correction_method}/{name}"
@@ -1264,11 +1269,17 @@ def read_contamination_metrics_results(
         futures = []
         for correction_method in correction_methods:
             for segmentation in xenium_std_seurat_analysis_dir.iterdir():
-                if segmentation.stem == "proseg_mode":
+                if segmentation.stem in ["proseg_mode", "bats_normalised", "bats_expected"]:
                     continue
                 for condition in segmentation.iterdir():
                     if ref_condition is not None and condition.name != ref_condition:
                         continue
+                    if condition.stem == "melanoma":
+                        if level == "Level2.1":
+                            print("Using Level1 for melanoma\t")
+                        if reference == "matched_reference_combo":
+                            print("Using external_reference for melanoma\t")
+
                     for panel in condition.iterdir():
                         if ref_panel is not None and panel.name != ref_panel:
                             continue

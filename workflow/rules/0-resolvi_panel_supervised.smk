@@ -16,7 +16,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                         normalisation,annotation_mode,reference,method,level,f'{mixture_k=}',f'{use_batch=}')
                 name = '/'.join(k)
 
-                out_dir_resolvi_model = results_dir / f'resolvi_panel_supervised/{name}/model/'
+                out_dir_resolvi_model = results_dir / f'resolvi_panel_supervised_{use_batch=}/{name}/model/'
                 out_file_resolvi_model = out_dir_resolvi_model / 'model.pt'
                 out_files_training.append(out_file_resolvi_model)
 
@@ -46,7 +46,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                     threads: 1
                     resources:
                         mem='80GB',# if panel.stem == '5k' else '10GB',
-                        runtime='3h',
+                        runtime='8h',
                         slurm_partition = "gpu",
                         slurm_extra = '--gres=gpu:1',
                     conda:
@@ -55,7 +55,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                         """
                         mkdir -p "$(dirname {params.out_dir_resolvi_model})"
 
-                        python workflow/scripts/xenium/resolvi_sample_training.py \
+                        python workflow/scripts/xenium/resolvi_panel_training.py \
                             --panel {input.panel} \
                             --xenium_processed_data_dir {params.xenium_processed_data_dir} \
                             --cell_type_annotation_dir {params.cell_type_annotation_dir} \
@@ -97,8 +97,8 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                 name_model = '/'.join(k_model)
                 name = '/'.join(k)                        
 
-                dir_resolvi_model = results_dir / f'resolvi_panel_supervised/{name_model}/model/'
-                out_dir = results_dir / f'resolvi_panel_supervised/{name}/'
+                dir_resolvi_model = results_dir / f'resolvi_panel_supervised_{use_batch=}/{name_model}/model/'
+                out_dir = results_dir / f'resolvi_panel_supervised_{use_batch=}/{name}/'
                 out_file = out_dir / 'inference.done'
                 out_files_inference.append(out_file)
 
@@ -110,6 +110,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                     output:
                         out_file=touch(out_file),
                     params:
+                        xenium_processed_data_dir=xenium_processed_data_dir,
                         dir_resolvi_model=dir_resolvi_model,
                         results_dir=results_dir,
                         cell_type_annotation_dir=cell_type_annotation_dir,
@@ -126,9 +127,10 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                         num_samples=num_samples,
                         batch_size=batch_size,
                         mixture_k=mixture_k,
+                        use_batch='--use_batch' if use_batch else '',
                     threads: 1
                     resources:
-                        mem='200GB',# if panel.stem == '5k' else '10GB',
+                        mem='500GB',# if panel.stem == '5k' else '10GB',
                         runtime='12h',
                         slurm_partition = "gpu",
                         slurm_extra = '--gres=gpu:1',
@@ -137,8 +139,9 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                     shell:
                         """
 
-                        python workflow/scripts/xenium/resolvi_sample_inference.py \
+                        python workflow/scripts/xenium/resolvi_panel_inference.py \
                         --panel {input.panel} \
+                        --xenium_processed_data_dir {params.xenium_processed_data_dir} \
                         --dir_resolvi_model {params.dir_resolvi_model} \
                         --results_dir {params.results_dir} \
                         --cell_type_annotation_dir {params.cell_type_annotation_dir} \
@@ -155,6 +158,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                         --num_samples {params.num_samples} \
                         --batch_size {params.batch_size} \
                         --mixture_k {params.mixture_k} \
+                        {params.use_batch} \
                         
                         echo "DONE"
                         """
@@ -168,4 +172,4 @@ rule resolvi_panel_inference_supervised_all:
     input:
         out_files_inference
     output:
-        touch(results_dir / "resolvi_panel_supervised.done")
+        touch(results_dir / f"resolvi_panel_supervised_{use_batch=}.done")

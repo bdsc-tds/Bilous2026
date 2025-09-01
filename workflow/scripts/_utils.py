@@ -264,7 +264,7 @@ def logreg(
     if scale:
         X = StandardScaler().fit_transform(X)
 
-    # Split data into cross validaton sets
+    # Split data into cross validation sets
     if cv_mode == "stratified":
         cv = StratifiedKFold(n_splits=n_splits, shuffle=False)
     elif cv_mode == "spatial":
@@ -293,9 +293,14 @@ def logreg(
         model = LogisticRegression(max_iter=max_iter, class_weight=class_weight)
 
         # Empirical p-value calculation using permutation test
-        score, perm_scores, p_value = permutation_test_score(
-            model, X, y, scoring=scoring, n_permutations=n_permutations, cv=cv, n_jobs=-1, verbose=1
-        )
+        try:
+            score, perm_scores, p_value = permutation_test_score(
+                model, X, y, scoring=scoring, n_permutations=n_permutations, cv=cv, n_jobs=-1, verbose=1
+            )
+        except ValueError:
+            score = np.nan
+            perm_scores = np.array([np.nan])
+            p_value = np.nan
 
         # Summarize permutation test results
         df_permutations = pd.DataFrame(
@@ -520,7 +525,11 @@ def rename_methods(
     },
     rename_correction={
         "resolvi": "ResolVI",
+        "resolvi_panel_use_batch=True": "ResolVI",
+        "resolvi_panel_use_batch=False": "ResolVI",
         "resolvi_supervised": "ResolVI supervised",
+        "resolvi_panel_supervised_use_batch=True": "ResolVI supervised",
+        "resolvi_panel_supervised_use_batch=False": "ResolVI supervised",
         "ovrlpy_correction_signal_integrity_threshold=0.5": "ovrlpy 0.5",
         "ovrlpy_correction_signal_integrity_threshold=0.7": "ovrlpy 0.7",
         "ovrlpy_0.5": "ovrlpy 0.5",

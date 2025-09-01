@@ -3,7 +3,9 @@ params_product = list(product(normalisations, layers, references, methods, level
 out_files_panel = []
 
 for correction_method in correction_methods:
-    for segmentation in (segmentations := xenium_std_seurat_analysis_dir.iterdir()):
+    if correction_method =='raw':
+        continue
+    for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
         if segmentation.stem in ['proseg_mode','bats_normalised','bats_expected']:
             continue
         for condition in (conditions := segmentation.iterdir()): 
@@ -20,29 +22,29 @@ for correction_method in correction_methods:
                     embed_file = results_dir / f'{correction_method}_embed_panel/{name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet'
 
                     # no need to plot panel for panel level UMAPs
-                    if color == 'panel':
+                    if level == 'panel':
                         continue
                     
                     # no need to plot sample coloring for every param combination
-                    if color == 'sample' and (reference != references[0] or method != methods[0]):
+                    if level == 'sample' and (reference != references[0] or method != methods[0]):
                         continue
                                                                                                                                                     # _{layer}
-                    out_file = figures_dir / f"{correction_method}_embed_panel/{name}/umap_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{reference}_{method}_{color}.{extension}"
+                    out_file = figures_dir / f"{correction_method}_embed_panel/{name}/umap_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{reference}_{method}_{level}.{extension}"
                     out_files_panel.append(out_file)
 
                     rule:
-                        name: f'{correction_method}_embed_panel_plot/{name}/umap_{reference}_{method}_{color}_{layer}'
+                        name: f'{correction_method}_embed_panel_plot/{name}/umap_{reference}_{method}_{level}_{layer}'
                         input:
                             panel=panel,
                             embed_file=embed_file,
                         output:
                             out_file=out_file,
                         params:
-                            cell_type_annotation_dir=xenium_cell_type_annotation_dir,
+                            cell_type_annotation_dir=cell_type_annotation_dir,
                             normalisation=normalisation,
                             reference=reference,
                             method=method,
-                            color=color,
+                            color=level,
                             cell_type_palette=cell_type_palette,
                             panel_palette=panel_palette,
                             sample_palette=sample_palette,

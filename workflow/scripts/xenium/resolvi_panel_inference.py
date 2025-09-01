@@ -23,7 +23,8 @@ torch.set_float32_matmul_precision("medium")
 # Set up argument parser
 def parse_args():
     parser = argparse.ArgumentParser(description="Embed panel of Xenium samples.")
-    parser.add_argument("--panel", type=str, help="Path to the xenium sample file.")
+    parser.add_argument("--panel", type=Path, help="Path to the xenium sample file.")
+    parser.add_argument("--xenium_processed_data_dir", type=Path, help="Path to the xenium processed data directories")
     parser.add_argument("--dir_resolvi_model", type=str, help="directory with saved RESOLVI model weights")
     parser.add_argument("--results_dir", type=Path, help="results directory")
     parser.add_argument("--cell_type_annotation_dir", type=Path, help="Path to the cell_type_annotation_dir.")
@@ -76,12 +77,12 @@ if __name__ == "__main__":
         print("Reading samples and cell type annotation")
         labels_key = "labels_key"
         semisupervised = True
-        out_dir = args.results_dir / "resolvi_panel_supervised"
+        out_dir = args.results_dir / f"resolvi_panel_supervised_use_batch={args.use_batch}"
     else:
         print("Reading samples")
         labels_key = None
         semisupervised = False
-        out_dir = args.results_dir / "resolvi_panel"
+        out_dir = args.results_dir / f"resolvi_panel_use_batch={args.use_batch}"
 
     if args.use_batch:
         batch_key = "sample"
@@ -127,7 +128,7 @@ if __name__ == "__main__":
                 annot_file = (
                     args.cell_type_annotation_dir
                     / name_annot
-                    / f"{args.normalisation}/{args.mode}/{args.reference}/{args.method}/{args.level}/single_cell/labels.parquet"
+                    / f"{args.normalisation}/{args.annotation_mode}/{args.reference}/{args.method}/{args.level}/single_cell/labels.parquet"
                 )
                 ads[k].obs[labels_key] = pd.read_parquet(annot_file).set_index("cell_id").iloc[:, 0]
                 ads[k] = ads[k][ads[k].obs[labels_key].notna()].copy()
@@ -206,9 +207,11 @@ if __name__ == "__main__":
 
     # save
     for _, (seg, cond, pan, don, samp) in adata_out.obs[xenium_levels].drop_duplicates().iterrows():
+        print('saving',seg, cond, pan, don, samp)
+
         if semisupervised:
             k = (
-                seg,
+                seg.replace("proseg",segmentation),
                 cond,
                 pan,
                 don,
@@ -223,7 +226,7 @@ if __name__ == "__main__":
             )
         else:
             k = (
-                seg,
+                seg.replace("proseg",segmentation),
                 cond,
                 pan,
                 don,
@@ -236,10 +239,12 @@ if __name__ == "__main__":
         out_file_resolvi_corrected_counts = out_dir / f"{name}/corrected_counts.h5"
         out_file_resolvi_proportions = out_dir / f"{name}/proportions.parquet"
 
+        print("saving to:",out_file_resolvi_corrected_counts,'\n',out_file_resolvi_proportions)
         # subset sample
         adata_out_sub = adata_out[(adata_out.obs[xenium_levels] == [seg, cond, pan, don, samp]).all(axis=1)].copy()
 
         # write
+        out_file_resolvi_corrected_counts.parent.mkdir(exist_ok=True, parents=True)
         readwrite.write_10X_h5(adata_out_sub, out_file_resolvi_corrected_counts)
         adata_out_sub.obs[proportions_cols].to_parquet(out_file_resolvi_proportions)
 

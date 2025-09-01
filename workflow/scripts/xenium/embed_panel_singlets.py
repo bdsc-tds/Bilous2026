@@ -55,7 +55,7 @@ min_cells = args.min_cells
 genes = args.genes
 
 cell_type_annotation_dir = args.cell_type_annotation_dir
-cell_type_normalisation = "lognorm"  # fix this for now, even for sctransfrom args.normalisation
+annotation_normalisation = "lognorm"  # fix this for now, even for sctransfrom args.normalisation
 reference = args.reference
 method = args.method
 level = args.level
@@ -129,7 +129,7 @@ for donor in (donors := panel.iterdir()):
         annot_file = (
             cell_type_annotation_dir
             / name_annot
-            / f"{cell_type_normalisation}/reference_based/{reference}/{method}/{level}/single_cell/output/results_df.parquet"
+            / f"{annotation_normalisation}/reference_based/{reference}/{method}/{level}/single_cell/output/results_df.parquet"
         )
 
         ads[k].obs["spot_class"] = pd.read_parquet(annot_file, columns=["cell_id", "spot_class"]).set_index("cell_id")

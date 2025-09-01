@@ -78,7 +78,7 @@ for genes_name, genes in genes_dict.items():
                                         genes=genes,
                                     threads: 1
                                     resources:
-                                        mem='50GB',
+                                        mem='100GB',
                                         runtime='3h',
                                     conda:
                                         "spatial"

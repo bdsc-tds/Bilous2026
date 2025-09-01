@@ -65,13 +65,15 @@ condition = panel.parents[0].stem
 OBSM_KEY = "X_pca"
 CT_KEY = (reference, method, level)
 BATCH_KEY = "batch_key"
-cell_type_normalisation = "lognorm"  # fix this for now, even for sctransfrom
+annotation_normalisation = "lognorm"  # fix this for now, even for sctransfrom
 exclude_cell_type_containing = "malignant"
 
 # read xenium samples
 ads = {}
 if raw_corrected_counts:
     for donor in (donors := panel.iterdir()):
+        if "mixture_k" in donor.name or "lognorm" in donor.name or not donor.is_dir():
+            continue
         for sample in (samples := donor.iterdir()):
             k = (segmentation, condition, panel.stem, donor.stem, sample.stem)
             name = "/".join(k)
@@ -81,9 +83,13 @@ if raw_corrected_counts:
                 sample_corrected_counts_path = xenium_count_correction_dir / f"{name_corrected}/corrected_counts.h5"
 
             else:
-                if correction_method == "resolvi":
+                if correction_method in ["resolvi", "resolvi_panel_use_batch=True", "resolvi_panel_use_batch=False"]:
                     name_corrected = f"{name}/{mixture_k=}/{num_samples=}/"
-                elif correction_method == "resolvi_supervised":
+                elif correction_method in [
+                    "resolvi_supervised",
+                    "resolvi_panel_supervised_use_batch=True",
+                    "resolvi_panel_supervised_use_batch=False",
+                ]:
                     name_corrected = f"{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}"
                 elif "ovrlpy" in correction_method:
                     name_corrected = f"{name}"
@@ -93,13 +99,15 @@ if raw_corrected_counts:
             ads[k] = sc.read_10x_h5(sample_corrected_counts_path)
 
             # read cell type annotation
-            sample_annotation_dir = cell_type_annotation_dir / f"{name}/{cell_type_normalisation}/reference_based"
+            sample_annotation_dir = cell_type_annotation_dir / f"{name}/{annotation_normalisation}/reference_based"
             annot_file = sample_annotation_dir / f"{reference}/{method}/{level}/single_cell/labels.parquet"
             ads[k].obs[CT_KEY] = pd.read_parquet(annot_file).set_index("cell_id").iloc[:, 0]
     is_raw = True
 
 else:
     for donor in (donors := panel.iterdir()):
+        if "mixture_k" in donor.name or "lognorm" in donor.name or not donor.is_dir():
+            continue
         for sample in (samples := donor.iterdir()):
             k = (
                 segmentation,
@@ -119,7 +127,7 @@ else:
             ads[k].obs_names = pd.read_parquet(sample_idx_path).iloc[:, 0]
 
             # read cell type annotation
-            sample_annotation_dir = cell_type_annotation_dir / f"{name}/{cell_type_normalisation}/reference_based"
+            sample_annotation_dir = cell_type_annotation_dir / f"{name}/{annotation_normalisation}/reference_based"
             annot_file = sample_annotation_dir / f"{reference}/{method}/{level}/single_cell/labels.parquet"
             ads[k].obs[CT_KEY] = pd.read_parquet(annot_file).set_index("cell_id").iloc[:, 0]
 

@@ -53,10 +53,11 @@ points_only = True
 extension = 'png'
 dpi=300
 annotation_mode='reference_based'
+annotation_normalisation='lognorm'
 
 # list params
 signal_integrity_thresholds = [0.5,0.7]
-correction_methods = ['raw','split_fully_purified','resolvi','resolvi_supervised'] + [f'ovrlpy_correction_{signal_integrity_threshold=}' for signal_integrity_threshold in signal_integrity_thresholds]
+correction_methods = ['raw','split_fully_purified',f'resolvi_panel_{use_batch=}',f'resolvi_panel_supervised_{use_batch=}'] + [f'ovrlpy_correction_{signal_integrity_threshold=}' for signal_integrity_threshold in signal_integrity_thresholds]
 normalisations = ['lognorm']#,'sctransform']
 layers = ['data']#,'scale_data']
 references = ['matched_reference_combo','external_reference']
@@ -76,10 +77,10 @@ cv_mode = 'spatial'
 markers_modes = ['diffexpr']#,'common_markers'] #'/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/xenium_paper/data/markers/cellmarker_cell_types_markers.json'
 genes_dict = {
     'all':[],# default: use all genes if empty list
-    'Xenium_NSCLC_5k_lung_chromium_common_genes':pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist(),
-    'Xenium_hLung_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hLung_v1_metadata.csv')['Gene'].tolist(),
-    'CHUV_IO_340_panel':pd.read_csv(config['markers_dir']+'CHUV_IO_340_panel.csv')['Gene ID'].tolist(),
-    'Xenium_hBreast_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hBreast_v1_metadata.csv')['Gene'].tolist()
+    # 'Xenium_NSCLC_5k_lung_chromium_common_genes':pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist(),
+    # 'Xenium_hLung_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hLung_v1_metadata.csv')['Gene'].tolist(),
+    # 'CHUV_IO_340_panel':pd.read_csv(config['markers_dir']+'CHUV_IO_340_panel.csv')['Gene ID'].tolist(),
+    # 'Xenium_hBreast_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hBreast_v1_metadata.csv')['Gene'].tolist()
 }
 train_modes = ['multivariate']#,'univariate']
 

@@ -36,7 +36,7 @@ parser.add_argument("--xenium_count_correction_dir", type=Path, help="xenium_cou
 parser.add_argument("--results_dir", type=Path, help="results_dir")
 parser.add_argument("--correction_method", type=str, help="correction_method")
 parser.add_argument("--cell_type_annotation_dir", type=Path, help="Path to the cell_type_annotation_dir.")
-parser.add_argument("--cell_type_normalisation", type=Path, help="")
+parser.add_argument("--annotation_normalisation", type=Path, help="")
 parser.add_argument("--reference", type=str, help="annotation reference")
 parser.add_argument("--method", type=str, help="annotation method")
 parser.add_argument("--level", type=str, help="annotation level")
@@ -64,7 +64,7 @@ xenium_count_correction_dir = args.xenium_count_correction_dir
 results_dir = args.results_dir
 correction_method = args.correction_method
 cell_type_annotation_dir = args.cell_type_annotation_dir
-cell_type_normalisation = args.cell_type_normalisation
+annotation_normalisation = args.annotation_normalisation
 reference = args.reference
 method = args.method
 level = args.level
@@ -75,48 +75,48 @@ condition = panel.parents[0].stem
 CT_KEY = (reference, method, level)
 
 # read xenium samples
-# if raw_corrected_counts:
-#     ads = {}
-#     for donor in (donors := panel.iterdir()):
-#         for sample in (samples := donor.iterdir()):
-#             k = (segmentation, condition, panel.stem, donor.stem, sample.stem)
-#             if "resolvi" in sample.as_posix():
-#                 sample_path = sample / f"{mixture_k=}/{num_samples=}/corrected_counts.h5"
-#             else:
-#                 sample_path = sample / "corrected_counts.h5"
-#             ads[k] = sc.read_10x_h5(sample_path)
-#     is_raw = True
 ads = {}
 if raw_corrected_counts:
     for donor in (donors := panel.iterdir()):
+        if "mixture_k" in donor.name or "lognorm" in donor.name or not donor.is_dir():
+            continue
         for sample in (samples := donor.iterdir()):
             k = (segmentation, condition, panel.stem, donor.stem, sample.stem)
             name = "/".join(k)
+
+            print(correction_method, name)
 
             if correction_method == "split_fully_purified":
                 name_corrected = f"{name}/{normalisation}/reference_based/{reference}/{method}/{level}/single_cell/split_fully_purified/"
                 sample_corrected_counts_path = xenium_count_correction_dir / f"{name_corrected}/corrected_counts.h5"
 
             else:
-                if correction_method == "resolvi":
+                if correction_method in ["resolvi", "resolvi_panel_use_batch=True", "resolvi_panel_use_batch=False"]:
                     name_corrected = f"{name}/{mixture_k=}/{num_samples=}/"
-                elif correction_method == "resolvi_supervised":
+                elif correction_method in [
+                    "resolvi_supervised",
+                    "resolvi_panel_supervised_use_batch=True",
+                    "resolvi_panel_supervised_use_batch=False",
+                ]:
                     name_corrected = f"{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}"
                 elif "ovrlpy" in correction_method:
                     name_corrected = f"{name}"
 
                 sample_corrected_counts_path = results_dir / f"{correction_method}/{name_corrected}/corrected_counts.h5"
 
+            print("reading from", sample_corrected_counts_path)
             ads[k] = sc.read_10x_h5(sample_corrected_counts_path)
 
             # read cell type annotation
-            # sample_annotation_dir = cell_type_annotation_dir / f"{name}/{cell_type_normalisation}/reference_based"
+            # sample_annotation_dir = cell_type_annotation_dir / f"{name}/{annotation_normalisation}/reference_based"
             # annot_file = sample_annotation_dir / f"{reference}/{method}/{level}/single_cell/labels.parquet"
             # ads[k].obs[CT_KEY] = pd.read_parquet(annot_file).set_index("cell_id").iloc[:, 0]
     is_raw = True
 
 else:
     for donor in (donors := panel.iterdir()):
+        if "mixture_k" in donor.name or "lognorm" in donor.name or not donor.is_dir():
+            continue
         for sample in (samples := donor.iterdir()):
             print(sample)
 

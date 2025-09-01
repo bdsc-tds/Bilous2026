@@ -107,6 +107,7 @@ batchcor_metrics = ["iLISI", "Graph connectivity", "KBET", "Silhouette batch", "
 # read results
 df = {}
 for correction_method in correction_methods:
+    print(f"Reading {correction_method}")
     for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
         k = (segmentation.stem, condition, panel, normalisation)
         name = "/".join(k)

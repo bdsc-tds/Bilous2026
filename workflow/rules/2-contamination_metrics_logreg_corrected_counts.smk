@@ -1,4 +1,4 @@
-params_product = list(product(normalisations, layers, references, methods, levels, correction_methods, train_modes))
+params_product = list(product(normalisations, layers, references, methods, levels, [c for c in correction_methods if c != 'raw'], train_modes))
 
 out_files = []
 for genes_name, genes in genes_dict.items():
@@ -35,9 +35,9 @@ for genes_name, genes in genes_dict.items():
                                     name_corrected = f'{name}/{normalisation}/reference_based/{reference}/{method}/{level}/single_cell/split_fully_purified/'
                                     sample_corrected_counts_path = xenium_count_correction_dir / f"{name_corrected}/corrected_counts.h5"
                                 else:
-                                    if correction_method == "resolvi":
+                                    if correction_method in ["resolvi","resolvi_panel_use_batch=True", "resolvi_panel_use_batch=False"]:
                                         name_corrected = f'{name}/{mixture_k=}/{num_samples=}/'
-                                    elif correction_method == "resolvi_supervised":
+                                    elif correction_method in ["resolvi_supervised", "resolvi_panel_supervised_use_batch=True", "resolvi_panel_supervised_use_batch=False"]:
                                         name_corrected = f'{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}'
                                     elif "ovrlpy" in correction_method:
                                         name_corrected = f'{name}'
@@ -98,7 +98,7 @@ for genes_name, genes in genes_dict.items():
                                             train_mode=train_mode,
                                         threads: 1
                                         resources:
-                                            mem='50GB',
+                                            mem='100GB',
                                             runtime='2d',
                                         conda:
                                             "spatial"

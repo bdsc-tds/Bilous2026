@@ -1,4 +1,4 @@
-params_product = list(product(normalisations, layers, references, methods, levels, correction_methods))
+params_product = list(product(normalisations, layers, references, methods, levels, [c for c in correction_methods if c != 'raw']))
 
 out_files = []
 
@@ -35,9 +35,9 @@ for genes_name, genes in genes_dict.items():
                                     sample_corrected_counts_path = xenium_count_correction_dir / f"{name_corrected}/corrected_counts.h5"
 
                                 else:
-                                    if correction_method == "resolvi":
+                                    if correction_method in ["resolvi", "resolvi_panel_use_batch=True", "resolvi_panel_use_batch=False"]:
                                         name_corrected = f'{name}/{mixture_k=}/{num_samples=}/'
-                                    elif correction_method == "resolvi_supervised":
+                                    elif correction_method in ["resolvi_supervised", "resolvi_panel_supervised_use_batch=True", "resolvi_panel_supervised_use_batch=False"]:
                                         name_corrected = f'{name}/{normalisation}/reference_based/{reference}/{method}/{level}/{mixture_k=}/{num_samples=}'
                                     elif "ovrlpy" in correction_method:
                                         name_corrected = f'{name}'
@@ -97,7 +97,7 @@ for genes_name, genes in genes_dict.items():
                                             genes=genes,
                                         threads: 1
                                         resources:
-                                            mem='50GB',
+                                            mem='100GB',
                                             runtime='3h',
                                         conda:
                                             "spatial"
