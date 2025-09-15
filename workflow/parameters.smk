@@ -57,13 +57,15 @@ annotation_normalisation='lognorm'
 
 # list params
 signal_integrity_thresholds = [0.5,0.7]
-correction_methods = ['raw','split_fully_purified',f'resolvi_panel_{use_batch=}',f'resolvi_panel_supervised_{use_batch=}'] + [f'ovrlpy_correction_{signal_integrity_threshold=}' for signal_integrity_threshold in signal_integrity_thresholds]
+correction_methods = ['raw','split_fully_purified',f'resolvi_panel_{use_batch=}',f'resolvi_panel_supervised_{use_batch=}'] 
+correction_methods += [f'ovrlpy_correction_{signal_integrity_threshold=}' for signal_integrity_threshold in signal_integrity_thresholds]
 normalisations = ['lognorm']#,'sctransform']
 layers = ['data']#,'scale_data']
 references = ['matched_reference_combo','external_reference']
 methods = ['rctd_class_aware']
 levels = ['Level1','Level2.1']
 colors = levels + ['sample']
+plot_types = ['umap','facet_umap']
 
 # contamination metrics params
 use_precomputed = True
@@ -89,10 +91,10 @@ max_n_cells = 100_000
 
 # allowed levels for each condition
 CONDITIONS_LEVELS = {
-    'melanoma':['Level1'],
-    'mesothelioma_pilot':['Level2.1'],
-    'NSCLC':['Level2.1'],
-    'breast':['Level2.1'],
+    'melanoma':['sample','Level1'],
+    'mesothelioma_pilot':['sample','Level2.1'],
+    'NSCLC':['sample','Level2.1'],
+    'breast':['sample','Level2.1'],
 }
 
 # allowed references for each condition

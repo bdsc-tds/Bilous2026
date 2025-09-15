@@ -273,9 +273,9 @@ df_all = _utils.get_cosine_similarity_score(
     correction_methods,
     columns=xenium_levels + ["correction_method", "cti", "cosine_similarity"],
 )
-_utils.rename_methods(df_all)
 
 # rename segmentations
+_utils.rename_methods(df_all)
 
 
 for cti in df_all["cti"].unique():

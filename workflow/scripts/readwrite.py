@@ -27,6 +27,12 @@ from spatialdata.models import (
     ShapesModel,
     PointsModel,
 )
+from functools import lru_cache
+
+
+@lru_cache(maxsize=None)
+def print_once(msg):
+    print(msg)
 
 
 try:
@@ -1276,9 +1282,9 @@ def read_contamination_metrics_results(
                         continue
                     if condition.stem == "melanoma":
                         if level == "Level2.1":
-                            print("Using Level1 for melanoma\t")
+                            print_once("Using Level1 for melanoma\t")
                         if reference == "matched_reference_combo":
-                            print("Using external_reference for melanoma\t")
+                            print_once("Using external_reference for melanoma\t")
 
                     for panel in condition.iterdir():
                         if ref_panel is not None and panel.name != ref_panel:

@@ -1033,29 +1033,6 @@ def plot_transfer_labels(adata, UMAP_KEY, BATCH_KEY, CT_KEYS):
         plt.show()
 
 
-def pseudobulk(ad, key):
-    ad.obs[key] = ad.obs[key].astype(str)
-
-    def _aggregate(x):
-        try:
-            return x.mode()[0]
-        except:
-            return np.nan
-
-    means = {}
-    for c in ad.obs[key].unique():
-        # if pd.isna(c):
-        #     idx = ad.obs[key].isna()
-        # else:
-        idx = ad.obs[key] == c
-        means[c] = np.asarray(ad[idx].X.mean(0)).squeeze()
-
-    ad_states = sc.AnnData(pd.DataFrame(means).T)
-    ad_states.var_names = ad.var_names
-    ad_states.obs = ad.obs.groupby(key).agg(_aggregate)
-    return ad_states
-
-
 def subsample(adata, obs_key, n_obs, random_state=0, copy=True):
     """
     subsample each class to same cell numbers (N). Classes are given by obs_key pointing to categorical in adata.obs.

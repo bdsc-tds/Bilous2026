@@ -1,5 +1,5 @@
 s=2
-params_product = list(product(normalisations, layers, references, methods, levels))
+params_product = list(product(normalisations, layers, references, methods, colors))
 
 out_files_panel = []
 

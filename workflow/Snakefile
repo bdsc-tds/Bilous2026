@@ -13,8 +13,8 @@ include: "parameters.smk"
 
 # include: "rules/0-scib_metrics.smk"
 # include: "rules/0-scib_metrics_singlets.smk"
-include: "rules/1-scib_metrics_corrected_counts.smk"
-include: "rules/2-scib_metrics_plot.smk"
+# include: "rules/1-scib_metrics_corrected_counts.smk"
+# include: "rules/2-scib_metrics_plot.smk"
 
 # include: "rules/0-detect_tls.smk"
 
@@ -47,17 +47,17 @@ include: "rules/2-scib_metrics_plot.smk"
 # include: "rules/1-coexpression_corrected_counts.smk"
 # include: "rules/1-coexpression_corrected_counts_plot.smk"
 # include: "rules/2-embedding_corrected_counts.smk"
-include: "rules/3-embedding_corrected_counts_plot.smk"
+# include: "rules/3-embedding_corrected_counts_plot.smk"
 
 # include: "rules/2-contamination_metrics_diffexpr.smk"
 # include: "rules/2-contamination_metrics_logreg.smk"
 # include: "rules/2-contamination_metrics_diffexpr_corrected_counts.smk"
 # include: "rules/2-contamination_metrics_logreg_corrected_counts.smk"
 
-include: "rules/3-contamination_metrics_diffexpr_specificity_boxplot.smk"
-include: "rules/3-contamination_metrics_diffexpr_specificity_logreg_boxplot.smk"
-include: "rules/3-contamination_metrics_diffexpr_sensitivity_boxplot.smk"
-include: "rules/3-contamination_metrics_cosine_similarity_scrnaseq.smk"
+# include: "rules/3-contamination_metrics_diffexpr_specificity_boxplot.smk"
+# include: "rules/3-contamination_metrics_diffexpr_specificity_logreg_boxplot.smk"
+# include: "rules/3-contamination_metrics_diffexpr_sensitivity_boxplot.smk"
+# include: "rules/3-contamination_metrics_cosine_similarity_scrnaseq.smk"
 
 rule all:
     input:
@@ -104,7 +104,7 @@ rule all:
         # rules.embed_sample_plot_all.input,
         #
         # rules.embed_panel_corrected_counts_all.input,
-        rules.embed_panel_corrected_counts_plot_all.input,
+        # rules.embed_panel_corrected_counts_plot_all.input,
         # rules.embed_condition_corrected_counts_all.input,
         # rules.embed_condition_corrected_counts_plot_all.input,
         #
@@ -123,8 +123,8 @@ rule all:
         #
         # rules.scib_metrics_panel_all.input,
         # rules.scib_metrics_panel_singlets_all.input,
-        rules.scib_metrics_panel_corrected_counts_all.input,
-        rules.scib_metrics_panel_plot_all.input,
+        # rules.scib_metrics_panel_corrected_counts_all.input,
+        # rules.scib_metrics_panel_plot_all.input,
         #
         # rules.contamination_metrics_diffexpr_all.input,
         # rules.contamination_metrics_logreg_all.input,
@@ -132,7 +132,7 @@ rule all:
         # rules.contamination_metrics_logreg_corrected_counts_all.input,
         #
         # rules.contamination_metrics_specificity_boxplot_all.input,
-        rules.contamination_metrics_specificity_logreg_boxplot_all.input,
-        rules.contamination_metrics_sensitivity_boxplot_all.input,
-        rules.contamination_metrics_cosine_similarity_scrnaseq_boxplot_all.input,
+        # rules.contamination_metrics_specificity_logreg_boxplot_all.input,
+        # rules.contamination_metrics_sensitivity_boxplot_all.input,
+        # rules.contamination_metrics_cosine_similarity_scrnaseq_boxplot_all.input,
 
