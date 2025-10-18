@@ -67,6 +67,10 @@ levels = ['Level1','Level2.1']
 colors = levels + ['sample']
 plot_types = ['umap','facet_umap']
 
+# shared genes and samples for NSCLC xenium/chromium comparisons
+nsclc_shared_genes = pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist()
+nsclc_shared_samples = ['0PSV','1G73']
+
 # contamination metrics params
 use_precomputed = True
 radius = 15
@@ -78,23 +82,26 @@ scoring = 'precision'
 cv_mode = 'spatial'
 markers_modes = ['diffexpr']#,'common_markers'] #'/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/xenium_paper/data/markers/cellmarker_cell_types_markers.json'
 genes_dict = {
-    'all':[],# default: use all genes if empty list
-    # 'Xenium_NSCLC_5k_lung_chromium_common_genes':pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist(),
+    # 'all':[],# default: use all genes if empty list
+    'Xenium_NSCLC_5k_lung_chromium_common_genes':nsclc_shared_genes,
     # 'Xenium_hLung_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hLung_v1_metadata.csv')['Gene'].tolist(),
     # 'CHUV_IO_340_panel':pd.read_csv(config['markers_dir']+'CHUV_IO_340_panel.csv')['Gene ID'].tolist(),
     # 'Xenium_hBreast_v1_metadata':pd.read_csv(config['markers_dir']+'Xenium_hBreast_v1_metadata.csv')['Gene'].tolist()
 }
 train_modes = ['multivariate']#,'univariate']
 
+
 # scib metrics params
 max_n_cells = 100_000
 
 # allowed levels for each condition
 CONDITIONS_LEVELS = {
-    'melanoma':['sample','Level1'],
-    'mesothelioma_pilot':['sample','Level2.1'],
+    'melanoma':[],
+    'mesothelioma_pilot':[],
     'NSCLC':['sample','Level2.1'],
     'breast':['sample','Level2.1'],
+    'CRC':[],
+    'PDAC':[],
 }
 
 # allowed references for each condition

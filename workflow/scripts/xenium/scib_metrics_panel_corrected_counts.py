@@ -68,6 +68,7 @@ BATCH_KEY = "batch_key"
 annotation_normalisation = "lognorm"  # fix this for now, even for sctransfrom
 exclude_cell_type_containing = "malignant"
 
+print(correction_method)
 # read xenium samples
 ads = {}
 if raw_corrected_counts:

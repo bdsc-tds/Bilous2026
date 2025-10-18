@@ -16,15 +16,15 @@ FIGURES_BASE_DIR="/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/xenium_paper/figures
 RELATIVE_PATHS=(
   # umaps breast 5um
   "embed_panel/10x_5um/breast/breast/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "resolvi_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "resolvi_supervised_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "resolvi_panel_use_batch=True_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "resolvi_panel_supervised_use_batch=True_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "split_fully_purified_embed_panel/10x_5um/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   
   # umaps breast proseg
   "embed_panel/proseg_expected/breast/breast/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "resolvi_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "resolvi_supervised_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "resolvi_panel_use_batch=True_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "resolvi_panel_supervised_use_batch=True_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "split_fully_purified_embed_panel/proseg_expected/breast/breast/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   
@@ -45,8 +45,8 @@ RELATIVE_PATHS=(
   "contamination_metrics_cosine_similarity_scrnaseq_boxplot/breast/breast/lognorm/data_matched_reference_combo_rctd_class_aware_Level2.1/breast_T_cell_cosine_similarity.png"
 
   # gsea heatmaps
-  "heatmap_diffexpr_gsea/heatmap_ref_panel='breast'_ref_segmentation='5µm'.png"
-  "heatmap_diffexpr_gsea/heatmap_ref_panel='breast'_ref_segmentation='ProSeg'.png"
+  "heatmap_diffexpr_gsea/heatmap_ref_condition='breast'_ref_panel='breast'_ref_segmentation='5µm'.png"
+  "heatmap_diffexpr_gsea/heatmap_ref_condition='breast'_ref_panel='breast'_ref_segmentation='ProSeg'.png"
 
   # count correction palette
   "palettes/col_palette_correction_method_count_correction_legend_vertical.png"

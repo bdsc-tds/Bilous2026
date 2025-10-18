@@ -74,6 +74,7 @@ condition = panel.parents[0].stem
 
 CT_KEY = (reference, method, level)
 
+print(correction_method)
 # read xenium samples
 ads = {}
 if raw_corrected_counts:

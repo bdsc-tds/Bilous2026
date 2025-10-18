@@ -1,7 +1,3 @@
-# genes = pd.read_csv(config['markers_dir']+'Xenium_hLung_v1_metadata.csv')['Gene'].tolist()
-genes = pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist()
-samples = ['0PSV','1G73','1GAC','1GDD','1GQ9','1GVD']
-
 out_files_panel = []
 
 for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
@@ -39,8 +35,8 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                             max_counts=max_counts,
                             max_features=max_features,
                             min_cells=min_cells,
-                            genes=genes,
-                            samples=samples,
+                            genes=nsclc_shared_genes,
+                            samples=nsclc_shared_samples,
                         threads: 1
                         resources:
                             mem='100GB' if panel.stem == '5k' else '50GB',

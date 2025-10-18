@@ -26,6 +26,7 @@ parser.add_argument("--max_counts", type=float, help="QC parameter from pipeline
 parser.add_argument("--max_features", type=float, help="QC parameter from pipeline config")
 parser.add_argument("--min_cells", type=int, help="QC parameter from pipeline config")
 parser.add_argument("--genes", type=str, nargs="*", default=[], help="Restrict data to these genes for the UMAP.")
+parser.add_argument("--samples", type=str, nargs="*", default=[], help="Restrict data to these samples for the UMAP.")
 
 args = parser.parse_args()
 
@@ -43,9 +44,15 @@ max_counts = args.max_counts
 max_features = args.max_features
 min_cells = args.min_cells
 genes = args.genes
+samples = args.samples
 
 print("Reading samples")
 ad_merge = sc.read_10x_h5(reference / f"{layer}.h5")
+ad_merge.obs = pd.read_parquet(reference / "metadata.parquet").set_index("cell_id")
+
+# subset to samples
+if len(samples):
+    ad_merge = ad_merge[ad_merge.obs["donor"].isin(samples), :].copy()
 
 # subset to genes
 if len(genes):
@@ -75,6 +82,9 @@ if len(genes):
     )
     # subset
     ad_merge = ad_merge[ad_merge_raw_counts.obs_names, genes_found].copy()
+
+
+print("Using", ad_merge.obs["donor"].nunique(), "samples and", ad_merge.n_vars, "genes")
 
 
 if "counts" in layer:
