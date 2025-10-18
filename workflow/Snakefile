@@ -32,13 +32,13 @@ include: "parameters.smk"
 # include: "rules/1-embedding_scrnaseq_joint.smk"
 # include: "rules/2-embedding_scrnaseq_joint_plot.smk"
 
-include: "rules/0-embedding_restricted_genes_and_samples.smk"
+# include: "rules/0-embedding_restricted_genes_and_samples.smk"
 # include: "rules/0-embedding_restricted_genes.smk"
 # include: "rules/1-embedding_restricted_genes_scrnaseq.smk"
 # include: "rules/1-embedding_restricted_genes_plot.smk"
-include: "rules/1-embedding_restricted_genes_and_samples_scrnaseq.smk"
+# include: "rules/1-embedding_restricted_genes_and_samples_scrnaseq.smk"
 include: "rules/1-embedding_restricted_genes_and_samples_plot.smk"
-include: "rules/2-embedding_restricted_genes_and_samples_scrnaseq_plot.smk"
+# include: "rules/2-embedding_restricted_genes_and_samples_scrnaseq_plot.smk"
 
 # include: "rules/0-ovrlpy.smk"
 # include: "rules/0-resolvi.smk"
@@ -95,13 +95,13 @@ rule all:
         #
         # rules.embed_panel_restricted_genes_all.input,
         # rules.embed_panel_restricted_genes_scrnaseq_all.input,
-        rules.embed_panel_restricted_genes_and_samples_all.input,
-        rules.embed_panel_restricted_genes_and_samples_scrnaseq_all.input,
+        # rules.embed_panel_restricted_genes_and_samples_all.input,
+        # rules.embed_panel_restricted_genes_and_samples_scrnaseq_all.input,
         #
         # rules.embed_panel_restricted_genes_plot_all.input,
         # rules.embed_panel_restricted_genes_scrnaseq_plot_all.input,
         rules.embed_panel_restricted_genes_and_samples_plot_all.input,
-        rules.embed_panel_restricted_genes_and_samples_scrnaseq_plot_all.input,
+        # rules.embed_panel_restricted_genes_and_samples_scrnaseq_plot_all.input,
         #
         # rules.embed_sample_all.input,
         # rules.embed_sample_plot_all.input,

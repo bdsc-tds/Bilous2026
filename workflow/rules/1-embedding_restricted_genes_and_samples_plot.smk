@@ -20,7 +20,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
                 k = (segmentation.stem,condition.stem,panel.stem,normalisation)
                 name = '/'.join(k)
                 embed_file = results_dir / f'embed_panel_restricted_genes_and_samples/{name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet'
-
+                                           
                 # no need to plot panel for panel color UMAPs
                 if color == 'panel':
                     continue
