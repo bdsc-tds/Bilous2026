@@ -19,7 +19,7 @@ RELATIVE_PATHS=(
   "embed_panel_restricted_genes_and_samples/10x_mm_5um/NSCLC/5k/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
 
   # chromium common genes UMAP
-  "embed_panel_restricted_genes_and_samples_scrnaseq/Xenium_NSCLC_5k_lung_chromium_common_genes/matched_combo_standard_lung_specific/umap_RNA_counts_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_Level2.1.png"
+  "embed_panel_restricted_genes_scrnaseq/Xenium_NSCLC_5k_lung_chromium_common_genes/matched_combo_standard_lung_specific/umap_RNA_counts_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_Level2.1.png"
 
   # palette cell types
   "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.png"

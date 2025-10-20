@@ -69,7 +69,8 @@ plot_types = ['umap','facet_umap']
 
 # shared genes and samples for NSCLC xenium/chromium comparisons
 nsclc_shared_genes = pd.read_csv(config['markers_dir']+'Xenium_NSCLC_5k_lung_chromium_common_genes.csv')['gene'].tolist()
-nsclc_shared_samples = ['0PSV','1G73']
+nsclc_shared_samples = ['0PSV','1G73','1GAC','1GDD','1GQ9','1GVD']
+
 
 # contamination metrics params
 use_precomputed = True
