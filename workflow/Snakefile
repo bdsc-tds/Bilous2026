@@ -37,7 +37,7 @@ include: "parameters.smk"
 # include: "rules/1-embedding_restricted_genes_scrnaseq.smk"
 # include: "rules/1-embedding_restricted_genes_plot.smk"
 # include: "rules/1-embedding_restricted_genes_and_samples_scrnaseq.smk"
-include: "rules/1-embedding_restricted_genes_and_samples_plot.smk"
+# include: "rules/1-embedding_restricted_genes_and_samples_plot.smk"
 # include: "rules/2-embedding_restricted_genes_and_samples_scrnaseq_plot.smk"
 
 # include: "rules/0-ovrlpy.smk"
@@ -47,8 +47,8 @@ include: "rules/1-embedding_restricted_genes_and_samples_plot.smk"
 # include: "rules/0-resolvi_panel_supervised.smk"
 # include: "rules/1-coexpression_corrected_counts.smk"
 # include: "rules/1-coexpression_corrected_counts_plot.smk"
-# include: "rules/2-embedding_corrected_counts.smk"
-# include: "rules/3-embedding_corrected_counts_plot.smk"
+include: "rules/2-embedding_corrected_counts.smk"
+include: "rules/3-embedding_corrected_counts_plot.smk"
 
 # include: "rules/2-contamination_metrics_diffexpr.smk"
 # include: "rules/2-contamination_metrics_logreg.smk"
@@ -100,14 +100,14 @@ rule all:
         #
         # rules.embed_panel_restricted_genes_plot_all.input,
         # rules.embed_panel_restricted_genes_scrnaseq_plot_all.input,
-        rules.embed_panel_restricted_genes_and_samples_plot_all.input,
+        # rules.embed_panel_restricted_genes_and_samples_plot_all.input,
         # rules.embed_panel_restricted_genes_and_samples_scrnaseq_plot_all.input,
         #
         # rules.embed_sample_all.input,
         # rules.embed_sample_plot_all.input,
         #
-        # rules.embed_panel_corrected_counts_all.input,
-        # rules.embed_panel_corrected_counts_plot_all.input,
+        rules.embed_panel_corrected_counts_all.input,
+        rules.embed_panel_corrected_counts_plot_all.input,
         # rules.embed_condition_corrected_counts_all.input,
         # rules.embed_condition_corrected_counts_plot_all.input,
         #

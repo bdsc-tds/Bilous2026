@@ -19,28 +19,28 @@ RELATIVE_PATHS=(
   "resolvi_panel_use_batch=True_embed_panel/10x_5um/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_supervised_use_batch=True_embed_panel/10x_5um/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/10x_5um/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "split_fully_purified_embed_panel/10x_5um/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "split_fully_purified_embed_panel_matched_reference_combo/10x_5um/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
 
   # umaps 5k mm 5um
   "embed_panel/10x_mm_5um/NSCLC/5k/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_use_batch=True_embed_panel/10x_mm_5um/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_supervised_use_batch=True_embed_panel/10x_mm_5um/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/10x_mm_5um/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "split_fully_purified_embed_panel/10x_mm_5um/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "split_fully_purified_embed_panel_matched_reference_combo/10x_mm_5um/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
 
   # umaps lung proseg
   "embed_panel/proseg_expected/NSCLC/lung/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_use_batch=True_embed_panel/proseg_expected/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_supervised_use_batch=True_embed_panel/proseg_expected/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/proseg_expected/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "split_fully_purified_embed_panel/proseg_expected/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "split_fully_purified_embed_panel_matched_reference_combo/proseg_expected/NSCLC/lung/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   
   # umaps 5k proseg
   "embed_panel/proseg_expected/NSCLC/5k/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_use_batch=True_embed_panel/proseg_expected/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "resolvi_panel_supervised_use_batch=True_embed_panel/proseg_expected/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
   "ovrlpy_correction_signal_integrity_threshold=0.5_embed_panel/proseg_expected/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
-  "split_fully_purified_embed_panel/proseg_expected/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
+  "split_fully_purified_embed_panel_matched_reference_combo/proseg_expected/NSCLC/5k/lognorm/umap_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_matched_reference_combo_rctd_class_aware_Level2.1.png"
 
   # bio/batch conservation barplots
   "scib_metrics_panel_plot/NSCLC/5k/lognorm/scib_metrics_Leiden_ARI_data_matched_reference_combo_rctd_class_aware_Level2.1_n_comps=50_max_n_cells=100000.png"
