@@ -1,10 +1,10 @@
 # Xenium analysis pipeline
 
-This repository contains the analysis pipeline and figure generation scripts downstream of the (xenium preprocessing pipeline)[https://github.com/bdsc-tds/xenium_analysis_pipeline/tree/main]. The workflow reproduces analyses and figures presented in the paper, specifically:
+This repository contains the analysis pipeline and figure generation scripts downstream of the [xenium preprocessing pipeline](https://github.com/bdsc-tds/xenium_analysis_pipeline/tree/main). The workflow reproduces analyses and figures presented in the paper, specifically:
 *   **Count correction:** Evaluation of `SPLIT`, `resolvi` and `ovrlpy` (overlap correction) methods.
 *   **Contamination analysis:** Measuring specificity, sensitivity, scib metrics, and cosine similarity with pseudobulk snRNAseq across platforms.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 *   **Snakemake:** For workflow management.
@@ -20,7 +20,7 @@ The workflow uses Snakemake profiles for execution on a SLURM cluster:
 Since the pipeline is very computationally intensive, by default all steps are commented out in `workflow/Snakefile`.
 The include statement for a `.smk` file and corresponding rules in `rule all` can be uncommented one at a time to run the step of interest. 
 
-## 📁 Repository Structure
+## Repository Structure
 *   **`data/`**: Directories for `xenium` and `scRNAseq` raw/processed datasets and associated metadata.
 *   **`config/`**: Snakemake pipeline paths defined in `config.yml`.
 *   **`workflow/`**: Snakemake logic, including `rules/` and `scripts/`. 
@@ -37,10 +37,7 @@ The include statement for a `.smk` file and corresponding rules in `rule all` ca
     *   `resolvi`: Results from the Resolvi signal enhancement method.
 
 
-## 📊 Key Analysis Modules
+## Key Analysis Modules
 *   **Contamination Metrics:** Evaluates spatial specificity and log-regression based precision/recall.
 *   **Resolvi & Ovrlpy:** Scripts for evaluating signal integrity thresholds (0.5, 0.7) and corrected counts.
 *   **Separability Metrics:** Analysis of how well different cell types are resolved in spatial vs. dissociated platforms.
-
-## ⚖️ License
-Refer to the `LICENSE` file for distribution and usage rights.
