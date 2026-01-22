@@ -5,6 +5,7 @@ figures/*
 !data/.gitkeep
 !results/.gitkeep
 !figures/.gitkeep
+figures_png
 
 #Ignore xenium_analysis_pipeline
 xenium_analysis_pipeline/
