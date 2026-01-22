@@ -6,6 +6,7 @@ figures/*
 !results/.gitkeep
 !figures/.gitkeep
 figures_png
+figures_manuscript_png
 
 #Ignore xenium_analysis_pipeline
 xenium_analysis_pipeline/
