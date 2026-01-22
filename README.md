@@ -13,7 +13,7 @@ The workflow uses Snakemake profiles for execution on a SLURM cluster:
 ./run.slurm
 ```
 
-Since the pipeline is very computationally intensive, by default all steps are commented out in `workflow/Snakefile`.
+Since the pipeline is diverse and computationally intensive, by default all steps are commented out in `workflow/Snakefile`.
 The include statement for a `.smk` file and corresponding rules in `rule all` can be uncommented one at a time to run the step of interest. 
 
 ## Repository Structure
