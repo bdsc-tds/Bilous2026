@@ -1,4 +1,4 @@
-This repository contains the analysis pipeline and figures presented in the paper downstream of the [xenium preprocessing pipeline](https://github.com/bdsc-tds/xenium_analysis_pipeline/tree/main), specifically the evaluation of `SPLIT`, `resolvi` and `ovrlpy` (overlap correction) methods in terms of specificity, sensitivity, scib metrics, and cosine similarity with pseudobulk snRNAseq across platforms.
+This repository contains the analysis pipeline and figures presented in the paper downstream of the [xenium preprocessing pipeline](https://github.com/bdsc-tds/xenium_analysis_pipeline/tree/main), specifically the evaluation of `SPLIT`, `resolvi` and `ovrlpy` methods in terms of specificity, sensitivity, scib metrics, and cosine similarity with pseudobulk snRNAseq across platforms.
 
 ## Getting Started
 
