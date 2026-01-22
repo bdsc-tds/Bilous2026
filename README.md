@@ -23,14 +23,11 @@ The include statement for a `.smk` file and corresponding rules in `rule all` ca
 *   **`workflow/notebooks/`**: Drafts used to create the snakemake rules. Only few notebooks were not incorporated as snakemake rules:
     *   `0-palettes.ipynb`: Creates figure legends used throughout the paper. 
     *   `xenium/1-xenium_decontamination_comparison_logreg.ipynb`: Creates some subplots of figure 4. 
-    *   `xenium/1-xenium_revision_figure_*.ipynb`: Creates some of the supplementary figures. 
-*   **`figures/`**:  Figures outputs and associated .csv data.
+    *   `xenium/1-xenium_revision_figure_*.ipynb`: Creates some of the supplementary figures.
+*   **`results/`**: Analysis outputs.
+*   **`figures/`**: Figure outputs and associated .csv data.
 *   **`figures_manuscript/`**: Figures symlinks into paper figures organized by figure number.
 *   **`figures_manuscript_data/`**: Figures data symlinks into paper figures organized by figure number.
-*   **`results/`**: Analysis outputs, including:
-    *   `scib_metrics`: Integration benchmarking results.
-    *   `contamination_metrics`: Specificity/precision calculations.
-    *   `resolvi`: Results from the Resolvi signal enhancement method.
 
 
 ## Key Analysis Modules
