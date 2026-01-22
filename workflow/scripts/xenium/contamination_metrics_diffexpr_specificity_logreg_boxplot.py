@@ -15,6 +15,19 @@ from pathlib import Path
 sys.path.append("workflow/scripts/")
 import _utils
 import readwrite
+import matplotlib as mpl
+
+mpl.rcParams.update(
+    {
+        "pdf.fonttype": 42,  # embed TrueType fonts (keeps text as text)
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",  # if exporting SVG
+        "text.usetex": False,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "savefig.transparent": True,
+    }
+)
 
 sns.set_style("ticks")
 
@@ -196,7 +209,9 @@ for rank_metric in rank_metrics:
         for cti, ctj in df[["cti", "ctj"]].drop_duplicates().values:
             cti_name = cti.replace(" ", "_")
             ctj_name = ctj.replace(" ", "_")
-            out_file = out_dir / f"{panel}_{cti_name}_contaminated_by_{ctj_name}_{rank_metric}_{plot_metric}.png"
+            out_file = (
+                out_dir / f"{panel}_{cti_name}_contaminated_by_{ctj_name}_{rank_metric}_{plot_metric}.{extension}"
+            )
 
             df_plot = df.query("cti == @cti and ctj == @ctj")
 
@@ -267,13 +282,12 @@ for rank_metric in rank_metrics:
 
             sns.despine()
             ax.yaxis.grid(True)
-            ax.tick_params(axis='x', labelsize=14)
-            ax.tick_params(axis='y', labelsize=16)
+            ax.tick_params(axis="x", labelsize=14)
+            ax.tick_params(axis="y", labelsize=16)
             if plot_metric == '"-log10pvalue"':
                 ax.set.ylabel(r"$-\log_{10} \text{ p-value}$", fontsize=14)
             else:
                 ax.set_ylabel(plot_metric, fontsize=14)
-            
 
             # title = f"Condition: {condition}, Panel: {panel}, Reference: {reference}, Method: {method}, Level: {level} \n{cti} contaminated by {ctj}\n rank metric: {rank_metric}, plot metric: {plot_metric}"
             # plt.suptitle(title, y=1.05)
@@ -285,5 +299,6 @@ for rank_metric in rank_metrics:
             #     frameon=False,
             # )
             # plt.tight_layout(rect=[0, 0, 1, 0.95])
+            df.to_csv(Path(out_file).with_suffix(".csv"))
             plt.savefig(out_file, dpi=dpi, bbox_inches="tight")
             plt.close()

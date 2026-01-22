@@ -1,5 +1,5 @@
 s=3
-layer = 'RNA_counts'
+layer_ = 'RNA_counts'
 
 out_files_panel = []
 
@@ -16,7 +16,7 @@ for genes_name, genes in genes_dict.items():
                 continue
 
             # input embedding file (doesn't depend on ref,method or color loops but more readable to have here)
-            embed_file = results_dir / f'embed_panel_restricted_genes_and_samples_scrnaseq/{genes_name}/{reference_name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet' 
+            embed_file = results_dir / f'embed_panel_restricted_genes_and_samples_scrnaseq/{genes_name}/{reference_name}/umap_{layer_}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet' 
 
             # no need to plot panel for panel color UMAPs
             if color == 'panel':
@@ -26,11 +26,11 @@ for genes_name, genes in genes_dict.items():
             if color == 'sample':
                 continue
 
-            out_file = figures_dir / f"embed_panel_restricted_genes_and_samples_scrnaseq/{genes_name}/{reference_name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{color}.{extension}"
+            out_file = figures_dir / f"embed_panel_restricted_genes_and_samples_scrnaseq/{genes_name}/{reference_name}/umap_{layer_}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{color}.{extension}"
             out_files_panel.append(out_file)
 
             rule:
-                name: f'embed_panel_restricted_genes_and_samples_scrnaseq_plot/{genes_name}/{reference_name}/umap_{layer}_{color}'
+                name: f'embed_panel_restricted_genes_and_samples_scrnaseq_plot/{genes_name}/{reference_name}/umap_{layer_}_{color}'
                 input:
                     embed_file=embed_file,
                 output:

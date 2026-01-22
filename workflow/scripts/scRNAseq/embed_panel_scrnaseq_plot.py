@@ -5,6 +5,19 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
+import matplotlib as mpl
+
+mpl.rcParams.update(
+    {
+        "pdf.fonttype": 42,  # embed TrueType fonts (keeps text as text)
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",  # if exporting SVG
+        "text.usetex": False,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "savefig.transparent": True,
+    }
+)
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description="Plot panel of Xenium donors.")
@@ -112,5 +125,7 @@ if not points_only:
 else:
     ax.axis("off")
 
+df.to_csv(Path(out_file).with_suffix(".csv"))
 plt.savefig(out_file, dpi=dpi, bbox_inches="tight")
+plt.savefig(Path(out_file).with_suffix(".png"), dpi=dpi, bbox_inches="tight")
 plt.close()

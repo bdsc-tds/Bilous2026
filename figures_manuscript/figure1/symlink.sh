@@ -24,7 +24,7 @@ RELATIVE_PATHS=(
   "embed_panel_scrnaseq_joint/matched_combo_standard_lung_specific_matched_combo_standard_breast_specific/umap_RNA_counts_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_Level2.1.png"
 
   # palette cell types
-  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.png"
+  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.pdf"
 )
 
 # --- DEFINE YOUR ABSOLUTE TARGET PATHS HERE ---

@@ -17,6 +17,19 @@ from pathlib import Path
 sys.path.append("workflow/scripts/")
 import _utils
 import readwrite
+import matplotlib as mpl
+
+mpl.rcParams.update(
+    {
+        "pdf.fonttype": 42,  # embed TrueType fonts (keeps text as text)
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",  # if exporting SVG
+        "text.usetex": False,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "savefig.transparent": True,
+    }
+)
 
 cfg = readwrite.config()
 
@@ -282,7 +295,7 @@ for cti in df_all["cti"].unique():
     df = df_all.query(f"panel == '{panel}' and cti == '{cti}'")
     cti_name = cti.replace(" ", "_")
 
-    out_file = out_dir / f"{panel}_{cti_name}_{plot_metric}.png"
+    out_file = out_dir / f"{panel}_{cti_name}_{plot_metric}.{extension}"
     print(cti, out_file)
 
     # plotting params, palette
@@ -346,4 +359,5 @@ for cti in df_all["cti"].unique():
     #     frameon=False,
     # )
     # plt.tight_layout(rect=[0, 0, 1, 0.95])
+    df.to_csv(Path(out_file).with_suffix(".csv"))
     plt.savefig(out_file, dpi=dpi, bbox_inches="tight")

@@ -14,7 +14,7 @@ FIGURES_BASE_DIR="/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/xenium_paper/figures
 # --- DEFINE YOUR RELATIVE TARGET PATHS HERE ---
 # These paths are relative to FIGURES_BASE_DIR
 RELATIVE_PATHS=(
-  "rankings_importances/rankings_importances_ref_panel='lung'_ref_segmentation='5µm'_rank_method='mean'_scale_method='abssum'_T cell_malignant cell.png"
+  "rankings_importances/rankings_importances_ref_panel='lung'_ref_segmentation='5µm'_rank_method='mean'_scale_method='abssum'_T cell_malignant cell.pdf"
 )
 
 # --- DEFINE YOUR ABSOLUTE TARGET PATHS HERE ---

@@ -22,19 +22,19 @@ RELATIVE_PATHS=(
   "embed_panel_restricted_genes_scrnaseq/Xenium_NSCLC_5k_lung_chromium_common_genes/matched_combo_standard_lung_specific/umap_RNA_counts_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_Level2.1.png"
 
   # palette cell types
-  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.png"
+  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.pdf"
 )
 
 # --- DEFINE YOUR ABSOLUTE TARGET PATHS HERE ---
 # These paths are full, absolute paths and ignore FIGURES_BASE_DIR
 ABSOLUTE_PATHS=(
   # xenium 5K vs Xenium Lung mean gene expression, shared genes
-  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/correlation_5k_lung_mean_gene_expr_matched.png"
+  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/correlation_5k_lung_mean_gene_expr_matched.pdf"
   
   # xenium 5K vs Chromiun and Xenium Lung vs chromium mean gene expression per cell type, shared genes, sample 0PSV
-  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/selected_celltype_correlation_mean_gene_expr_5k_lung_chromium_0PSV.png"
+  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/selected_celltype_correlation_mean_gene_expr_5k_lung_chromium_0PSV.pdf"
   # xenium 5K vs Chromiun and Xenium Lung vs chromium mean gene expression per cell type, shared genes, sample 1G73
-  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/selected_celltype_correlation_mean_gene_expr_5k_lung_chromium_1G73.png"
+  "/work/PRTNR/CHUV/DIR/rgottar1/spatial/env/mbilous/Git/xenium_data_analysis/paper_figures/plots/Figure_2/selected_celltype_correlation_mean_gene_expr_5k_lung_chromium_1G73.pdf"
 
 
 )

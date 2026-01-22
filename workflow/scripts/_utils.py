@@ -740,7 +740,7 @@ def pseudobulk(ad, key, mode="sum"):
             agg[c] = np.asarray(ad[idx].X.mean(0)).squeeze()
     ad_states = anndata.AnnData(pd.DataFrame(agg).T)
     ad_states.var_names = ad.var_names
-    ad_states.obs = ad.obs.groupby(key).agg(_agg_obs)
+    ad_states.obs = ad_states.obs.join(ad.obs.groupby(key).agg(_agg_obs))
     return ad_states
 
 

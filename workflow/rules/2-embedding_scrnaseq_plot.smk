@@ -1,4 +1,5 @@
 s=3
+layer_ = 'RNA_counts'
 
 out_files_panel = []
 for reference in (references := scrnaseq_processed_data_dir.iterdir()):
@@ -8,9 +9,11 @@ for reference in (references := scrnaseq_processed_data_dir.iterdir()):
     for color in colors:
         if color == 'Level2.1' and 'external' in reference_name:
             continue
+        if 'melanoma' in reference_name or 'PDAC' in reference_name or 'CRC' in reference_name:
+            continue 
 
         # input embedding file (doesn't depend on ref,method or color loops but more readable to have here)
-        embed_file = results_dir / f'embed_panel_scrnaseq/{reference_name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet' 
+        embed_file = results_dir / f'embed_panel_scrnaseq/{reference_name}/umap_{layer_}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet' 
 
         # no need to plot panel for panel color UMAPs
         if color == 'panel':
@@ -20,11 +23,11 @@ for reference in (references := scrnaseq_processed_data_dir.iterdir()):
         if color == 'sample':
             continue
 
-        out_file = figures_dir / f"embed_panel_scrnaseq/{reference_name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{color}.{extension}"
+        out_file = figures_dir / f"embed_panel_scrnaseq/{reference_name}/umap_{layer_}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}_{color}.{extension}"
         out_files_panel.append(out_file)
 
         rule:
-            name: f'embed_panel_scrnaseq_plot/{reference_name}/umap_{layer}_{color}'
+            name: f'embed_panel_scrnaseq_plot/{reference_name}/umap_{layer_}_{color}'
             input:
                 embed_file=embed_file,
             output:

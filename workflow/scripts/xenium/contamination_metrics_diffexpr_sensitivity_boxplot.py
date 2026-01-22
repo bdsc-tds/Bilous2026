@@ -15,6 +15,19 @@ from pathlib import Path
 sys.path.append("workflow/scripts/")
 import _utils
 import readwrite
+import matplotlib as mpl
+
+mpl.rcParams.update(
+    {
+        "pdf.fonttype": 42,  # embed TrueType fonts (keeps text as text)
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",  # if exporting SVG
+        "text.usetex": False,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "savefig.transparent": True,
+    }
+)
 
 sns.set_style("ticks")
 
@@ -65,7 +78,6 @@ count_correction_palette = args.count_correction_palette
 use_precomputed = args.use_precomputed
 dpi = args.dpi
 extension = args.extension
-args = parser.parse_args()
 
 
 # Params
@@ -135,7 +147,7 @@ df_count_correction_palette = pd.read_csv(count_correction_palette, index_col=0)
 
 
 for plot_metric in plot_metrics:
-    out_file = out_dir / f"{panel}_{plot_metric}.png"
+    out_file = out_dir / f"{panel}_{plot_metric}.{extension}"
 
     df = _utils.get_df_summary_stats_plot(dfs, plot_metric=plot_metric)
     df = df.query("panel == @panel")
@@ -192,8 +204,8 @@ for plot_metric in plot_metrics:
 
     sns.despine()
     ax.yaxis.grid(True)
-    ax.tick_params(axis='x', labelsize=14)
-    ax.tick_params(axis='y', labelsize=16)
+    ax.tick_params(axis="x", labelsize=14)
+    ax.tick_params(axis="y", labelsize=16)
     if plot_metric == '"-log10pvalue"':
         ax.set.ylabel(r"$-\log_{10} \text{ p-value}$", fontsize=14)
     else:
@@ -208,5 +220,6 @@ for plot_metric in plot_metrics:
     #     title=hue_correction,
     #     frameon=False,
     # )
+    df.to_csv(Path(out_file).with_suffix(".csv"))
     plt.savefig(out_file, dpi=dpi, bbox_inches="tight")
     plt.close()

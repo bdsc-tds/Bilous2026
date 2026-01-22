@@ -20,7 +20,7 @@ RELATIVE_PATHS=(
   "embed_panel_restricted_genes_scrnaseq/CHUV_IO_340_panel/matched_combo_standard_lung_specific/umap_RNA_counts_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_Level2.1.png"
 
   # cell types palette
-  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.png"
+  "palettes/col_palette_cell_types_combo_Level2.1_legend_vertical.pdf"
 )
 
 # --- DEFINE YOUR ABSOLUTE TARGET PATHS HERE ---

@@ -21,7 +21,7 @@ RELATIVE_PATHS=(
   "embed_panel/10x_5um/NSCLC/lung/lognorm/umap_data_n_comps=50_n_neighbors=50_min_dist=0.5_euclidean_external_reference_rctd_class_aware_Level2.png"
 
   # cell types palette
-  "palettes/col_palette_cell_types_combo_Level2_external_legend_vertical.png"
+  "palettes/col_palette_cell_types_combo_Level2_external_legend_vertical.pdf"
 )
 
 

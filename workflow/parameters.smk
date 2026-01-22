@@ -50,7 +50,7 @@ metric = 'euclidean'
 s=0.5
 alpha=0.5
 points_only = True
-extension = 'png'
+extension = 'pdf'
 dpi=300
 annotation_mode='reference_based'
 annotation_normalisation='lognorm'
@@ -99,16 +99,18 @@ max_n_cells = 100_000
 CONDITIONS_LEVELS = {
     'melanoma':[],
     'mesothelioma_pilot':[],
-    'NSCLC':['sample','Level2.1'],
-    'breast':['sample','Level2.1'],
+    'NSCLC':['sample','Level2.1','Level2'],
+    'breast':['sample','Level2.1','Level2'],
     'CRC':[],
     'PDAC':[],
 }
 
 # allowed references for each condition
 CONDITIONS_REFERENCES = {
-    'melanoma':['external_reference'],
-    'mesothelioma_pilot':['matched_reference_combo'],
-    'NSCLC':['matched_reference_combo'],
-    'breast':['matched_reference_combo'],
+    'melanoma':[],#['external_reference'],
+    'mesothelioma_pilot':[],#['matched_reference_combo'],
+    'NSCLC':['matched_reference_combo',],#'external_reference'],
+    'breast':['matched_reference_combo',],#'external_reference'],
+    'CRC':[],
+    'PDAC':[]
 }

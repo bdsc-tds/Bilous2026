@@ -68,7 +68,7 @@ for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
 
 out_files_condition = []
 for segmentation in (segmentations := std_seurat_analysis_dir.iterdir()):
-    if segmentation.stem == 'proseg_v1':
+    if segmentation.stem in ['proseg_mode','bats_normalised','bats_expected']:
         continue
     for condition in (conditions := segmentation.iterdir()):
         n_panels = len(list(condition.iterdir()))

@@ -81,7 +81,7 @@ if color == "sample":
     # plot sample as color, no need to load annotations
     df = obs
     params = color
-    title = f"Segmentation: {segmentation.stem}, condition: {condition.stem}, Panel: {panel.stem}"
+    title = f"Segmentation: {segmentation.stem}, condition: {condition.stem}"
 
 else:
     # read cell type annotation
@@ -220,5 +220,7 @@ else:
     else:
         ax.axis("off")
 
+df.to_csv(Path(out_file).with_suffix(".csv"))
 plt.savefig(out_file, dpi=dpi, bbox_inches="tight")
+plt.savefig(Path(out_file).with_suffix(".png"), dpi=dpi, bbox_inches="tight")
 plt.close()

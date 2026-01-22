@@ -13,6 +13,19 @@ import sys
 
 sys.path.append("workflow/scripts/")
 import _utils
+import matplotlib as mpl
+
+mpl.rcParams.update(
+    {
+        "pdf.fonttype": 42,  # embed TrueType fonts (keeps text as text)
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",  # if exporting SVG
+        "text.usetex": False,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "savefig.transparent": True,
+    }
+)
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description="Embed panel of Xenium donors.")
@@ -168,5 +181,6 @@ ax.tick_params(axis="y", labelsize=16)
 #     frameon=False,
 # )
 # plt.tight_layout(rect=[0, 0, 1, 0.95])
+df.to_csv(Path(out_file).with_suffix(".csv"))
 plt.savefig(out_file, dpi=dpi, bbox_inches="tight")
 # plt.show()

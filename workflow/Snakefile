@@ -1,23 +1,29 @@
 configfile: "config/config.yml"
 include: "parameters.smk"
 
+# --- convert scRNA seurat .rds to h5 ---
 # include: "rules/0-seurat_to_h5.smk"
-# include: "rules/1-coexpression_scrnaseq_references.smk"
 
+# --- coexpression xenium contamination metric (unused) ---
 # include: "rules/0-coexpression.smk"
 # include: "rules/0-coexpression_cross_panel.smk"
 # include: "rules/1-coexpression_plot.smk"
+# include: "rules/1-coexpression_scrnaseq_references.smk"
 
+# --- xenium sklearn silhouette scores (unused) ---
 # include: "rules/0-silhouette.smk"
 # include: "rules/1-silhouette_plot.smk"
 
+# --- xenium scib metrics ---
 # include: "rules/0-scib_metrics.smk"
 # include: "rules/0-scib_metrics_singlets.smk"
 # include: "rules/1-scib_metrics_corrected_counts.smk"
 # include: "rules/2-scib_metrics_plot.smk"
 
+# --- xenium TLS detection (unused) ---
 # include: "rules/0-detect_tls.smk"
 
+# --- xenium and scRNA UMAPS ---
 # include: "rules/0-embedding.smk"
 # include: "rules/1-embedding_plot.smk"
 
@@ -35,21 +41,26 @@ include: "parameters.smk"
 # include: "rules/0-embedding_restricted_genes_and_samples.smk"
 # include: "rules/0-embedding_restricted_genes.smk"
 # include: "rules/1-embedding_restricted_genes_scrnaseq.smk"
-# include: "rules/1-embedding_restricted_genes_plot.smk"
 # include: "rules/1-embedding_restricted_genes_and_samples_scrnaseq.smk"
+# include: "rules/1-embedding_restricted_genes_plot.smk"
+# include: "rules/2-embedding_restricted_genes_scrnaseq_plot.smk"
 # include: "rules/1-embedding_restricted_genes_and_samples_plot.smk"
 # include: "rules/2-embedding_restricted_genes_and_samples_scrnaseq_plot.smk"
 
+# --- xenium run ovrlpy and resolvi ---
 # include: "rules/0-ovrlpy.smk"
 # include: "rules/0-resolvi.smk"
 # include: "rules/0-resolvi_supervised.smk"
 # include: "rules/0-resolvi_panel.smk"
 # include: "rules/0-resolvi_panel_supervised.smk"
+
+# --- xenium run coexpression with corrected counts (unused) ---
 # include: "rules/1-coexpression_corrected_counts.smk"
 # include: "rules/1-coexpression_corrected_counts_plot.smk"
-include: "rules/2-embedding_corrected_counts.smk"
-include: "rules/3-embedding_corrected_counts_plot.smk"
+# include: "rules/2-embedding_corrected_counts.smk"
+# include: "rules/3-embedding_corrected_counts_plot.smk"
 
+# --- xenium contamination metrics ---
 # include: "rules/2-contamination_metrics_diffexpr.smk"
 # include: "rules/2-contamination_metrics_logreg.smk"
 # include: "rules/2-contamination_metrics_diffexpr_corrected_counts.smk"
@@ -99,15 +110,15 @@ rule all:
         # rules.embed_panel_restricted_genes_and_samples_scrnaseq_all.input,
         #
         # rules.embed_panel_restricted_genes_plot_all.input,
-        # rules.embed_panel_restricted_genes_scrnaseq_plot_all.input,
         # rules.embed_panel_restricted_genes_and_samples_plot_all.input,
+        # rules.embed_panel_restricted_genes_scrnaseq_plot_all.input,
         # rules.embed_panel_restricted_genes_and_samples_scrnaseq_plot_all.input,
         #
         # rules.embed_sample_all.input,
         # rules.embed_sample_plot_all.input,
         #
-        rules.embed_panel_corrected_counts_all.input,
-        rules.embed_panel_corrected_counts_plot_all.input,
+        # rules.embed_panel_corrected_counts_all.input,
+        # rules.embed_panel_corrected_counts_plot_all.input,
         # rules.embed_condition_corrected_counts_all.input,
         # rules.embed_condition_corrected_counts_plot_all.input,
         #

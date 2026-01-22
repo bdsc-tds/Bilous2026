@@ -11,6 +11,8 @@ for genes_name, genes in genes_dict.items():
         for color in colors:
             if color == 'Level2.1' and 'external' in reference_name:
                 continue
+            if 'melanoma' in reference_name or 'PDAC' in reference_name or 'CRC' in reference_name:
+                continue
 
             # input embedding file (doesn't depend on ref,method or color loops but more readable to have here)
             embed_file = results_dir / f'embed_panel_restricted_genes_scrnaseq/{genes_name}/{reference_name}/umap_{layer}_{n_comps=}_{n_neighbors=}_{min_dist=}_{metric}.parquet' 
