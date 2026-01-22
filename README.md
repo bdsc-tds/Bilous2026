@@ -4,7 +4,7 @@ This repository contains the analysis pipeline and figures presented in the pape
 
 ### Prerequisites
 *   **Snakemake:** For workflow management.
-*   **Conda/Mamba:** For environment management (found in `workflow/envs`).
+*   **Conda/Mamba:** For environment management (`.yml` are found in `workflow/envs`).
 
 ### Running the Pipeline
 The workflow uses Snakemake profiles for execution on a SLURM cluster:
