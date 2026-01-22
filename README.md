@@ -28,9 +28,3 @@ The include statement for a `.smk` file and corresponding rules in `rule all` ca
 *   **`figures/`**: Figure outputs and associated .csv data.
 *   **`figures_manuscript/`**: Figures symlinks into paper figures organized by figure number.
 *   **`figures_manuscript_data/`**: Figures data symlinks into paper figures organized by figure number.
-
-
-## Key Analysis Modules
-*   **Contamination Metrics:** Evaluates spatial specificity and log-regression based precision/recall.
-*   **Resolvi & Ovrlpy:** Scripts for evaluating signal integrity thresholds (0.5, 0.7) and corrected counts.
-*   **Separability Metrics:** Analysis of how well different cell types are resolved in spatial vs. dissociated platforms.
